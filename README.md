@@ -26,8 +26,6 @@ Manually creating users and roles in the AWS Console is error-prone. With Terraf
    terraform plan
    terraform apply
 4. Check the AWS Console (or CLI) to verify IAM resources.
-````
-
 
 ## File structure
 
@@ -51,7 +49,3 @@ Manually creating users and roles in the AWS Console is error-prone. With Terraf
 * Add S3 backend for state.
 * Add CI/CD to validate and apply changes.
 * Extend to enforce tagging or cost controls.
-
-```
-
-```
