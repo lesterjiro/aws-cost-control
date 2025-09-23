@@ -1,4 +1,3 @@
-````markdown
 # AWS IAM Automation with Terraform
 
 This project automates the creation of IAM users, groups, roles, and policies using Terraform.  
