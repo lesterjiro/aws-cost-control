@@ -41,7 +41,7 @@ Manually creating users and roles in the AWS Console is error-prone. With Terraf
 ## Notes
 
 * Backend is currently local state. For production, switch to S3 + DynamoDB lock.
-* Policy JSON must be valid — AWS is strict with commas and structure.
+* Policy JSON must be valid, AWS is strict with commas and structure.
 * IAM best practice: avoid long-term users, prefer roles + temporary credentials.
 
 ## Next steps
