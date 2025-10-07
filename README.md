@@ -1,51 +1,64 @@
-# AWS IAM Automation with Terraform
+# **AWS Cost Control Automation with Terraform**
 
-This project automates the creation of IAM users, groups, roles, and policies using Terraform.  
-The goal is to remove manual AWS Console clicks and keep IAM configuration version-controlled and reproducible.
+This project automates AWS **Budgets**, **Billing Alarms**, and **Tag Enforcement** using Terraform.
+The goal is to help manage cloud costs, improve visibility, and enforce tagging compliance, all through Infrastructure as Code (IaC).
 
-## What it does
-- Creates an IAM group with a custom policy (least privilege).
-- Creates IAM users and attaches them to the group.
-- Creates IAM roles with trust policies for cross-service access.
-- Demonstrates how to separate variables, outputs, and JSON policy docs for clarity.
 
-## Why I built this
-I wanted to practice Infrastructure as Code (IaC) by automating common IAM setups.  
-Manually creating users and roles in the AWS Console is error-prone. With Terraform:
-- Config is repeatable across environments.
-- Policies are stored in code (easy to audit/change).
-- Easy to extend for future IAM needs.
+## **What it does**
 
-## How to use
+* Creates **AWS Budgets** with automated notifications when spending exceeds defined thresholds.
+* Sets up **CloudWatch Billing Alarms** integrated with SNS for real-time alerts.
+* Enforces **tag compliance** to ensure all resources are properly labeled for cost tracking.
+* Keeps cost-control configurations version-controlled and reproducible with Terraform.
+
+
+## **Why I built this**
+
+I wanted to learn how to apply Infrastructure as Code (IaC) to **AWS cost governance**.
+Managing budgets and cost alerts manually in the AWS Console can be repetitive and error-prone.
+With Terraform:
+
+* Configurations are **repeatable and auditable**.
+* Alerts and budgets can be **easily updated across environments**.
+* Tag enforcement helps maintain **cost accountability** for every resource.
+
+
+## **How to use**
+
 1. Clone this repo.
-2. Update `terraform.tfvars` with your values.
+2. Update the values in `terraform.tfvars` (budget amount, email, etc.).
 3. Run:
 
    ```bash
    terraform init
    terraform plan
    terraform apply
-4. Check the AWS Console (or CLI) to verify IAM resources.
+   ```
+4. Verify cost budgets, billing alarms, and tag policies in the AWS Console.
 
-## File structure
+
+## **File structure**
 
 ```text
 .
-├── main.tf                  # IAM resources
+├── main.tf                  # Main Terraform config
+├── budget.tf                # AWS Budgets setup
+├── billing_alarm.tf         # CloudWatch billing alarm + SNS config
+├── tag_enforcement.tf       # Tag policy / compliance setup
 ├── variables.tf             # Input variables
-├── outputs.tf               # Useful outputs
-├── iam-policy.json          # Example custom policy
-├── terraform.tfvars         # Your values (not committed)
+├── outputs.tf               # Outputs (e.g., budget IDs, alarm ARNs)
 ```
 
-## Notes
 
-* Backend is currently local state. For production, switch to S3 + DynamoDB lock.
-* Policy JSON must be valid, AWS is strict with commas and structure.
-* IAM best practice: avoid long-term users, prefer roles + temporary credentials.
+## **Notes**
 
-## Next steps
+* Uses **local state** for simplicity, for production, migrate to **S3 backend with state locking**.
+* All cost thresholds, notification emails, and tag keys are configurable via variables.
+* Follows AWS best practices for cost visibility and tagging governance.
 
-* Add S3 backend for state.
-* Add CI/CD to validate and apply changes.
-* Extend to enforce tagging or cost controls.
+
+## **Next steps**
+
+* Add S3 backend for state management.
+* Add CI/CD pipeline to automatically validate and apply Terraform changes.
+* Extend tagging enforcement to include service-specific policies.
